@@ -12,3 +12,5 @@ end
 
 gem "thin", "~> 1.6.3"
 gem "roda", "~> 2.3.0"
+gem "haml", "~> 4.0.6"
+gem "dotenv", "~> 2.0.1"
