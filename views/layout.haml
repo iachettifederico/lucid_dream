@@ -8,7 +8,13 @@
     = assets(:css)
     = assets(:js)
 
+    :javascript
+      $(document).foundation;
+      
   %body
-       
+    = partial("shared/top_bar")
+    %div(data-alert class="alert-box")
+      Your content goes here
+      %a(href="#" class="close") &times;
     #content
       = yield

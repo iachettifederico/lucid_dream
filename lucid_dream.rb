@@ -1,27 +1,20 @@
-class Roda
-  module RodaPlugins
-    module ExtensionMatchers
-      module RequestMethods
-        def extension(ext)
-          if remaining_path.end_with?(".#{ext}")
-            remaining_path.chomp!(".json")
-            yield
-          end
-        end
-      end
-    end
-
-    register_plugin(:extension_matcher, ExtensionMatchers)
-  end
-end
+require "./plugins/extension_matchers"
+require "./plugins/foundation_helpers"
 
 class LucidDream < Roda
+  def page_title
+    "Lucid Dream"
+  end
   plugin :environments
   self.environment = ENV["ENVIRONMENT"]
 
   plugin :render, engine: "haml"
+  plugin :partials
+  plugin :view_options
+
   plugin :json
   plugin :path_matchers
+  plugin :empty_root
 
   require "./assets/assets"
   plugin :assets, css: css_files, js: js_files
@@ -32,16 +25,22 @@ class LucidDream < Roda
 
   plugin :extension_matcher
 
+  plugin :foundation_helpers
+
   route do |r|
     r.assets
     r.root do
       view "welcome"
     end
 
+    r.on "journal" do
+      r.root do
+        view "journal/index"
+      end
+    end
+
     r.extension("json") do
       r.on "api" do
-        # next unless r.remaining_path.chomp!(".json")
-
         r.is "welcome" do
           {
            from: "JSON API",
@@ -49,11 +48,5 @@ class LucidDream < Roda
         end
       end
     end
-
-    r.is "welcome" do
-      "From <b>JSON API</b>"
-    end
-
   end
-
 end
