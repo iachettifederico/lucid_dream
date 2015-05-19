@@ -1,10 +1,8 @@
 require "./plugins/extension_matchers"
+require "./plugins/haml_helpers"
 require "./plugins/foundation_helpers"
 
 class LucidDream < Roda
-  def page_title
-    "Lucid Dream"
-  end
   plugin :environments
   self.environment = ENV["ENVIRONMENT"]
 
@@ -17,14 +15,13 @@ class LucidDream < Roda
   plugin :empty_root
 
   require "./assets/assets"
-  plugin :assets, css: css_files, js: js_files
-  compile_assets if production?
-
+  
   Dir["./models/*.rb"].each{|f| require f}
   Dir["./repositories/*.rb"].each{|f| require f}
 
   plugin :extension_matcher
 
+  plugin :haml_helpers
   plugin :foundation_helpers
 
   route do |r|
@@ -34,8 +31,9 @@ class LucidDream < Roda
     end
 
     r.on "journal" do
+      # Authenticate
       r.root do
-        view "journal/index"
+        view "journal/journal"
       end
     end
 
