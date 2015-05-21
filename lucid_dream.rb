@@ -5,17 +5,18 @@ require "./plugins/mystique"
 require "fattr"
 require "string_plus"
 
-class LucidDream < Roda
-  plugin :environments
-  self.environment = ENV["ENVIRONMENT"]
+module LucidDream
 
-  plugin :render, engine: "haml"
-  plugin :partials
-  plugin :view_options
+    
+  end
+  
+  class WebApp < Roda
+    plugin :environments
+    self.environment = ENV["ENVIRONMENT"]
 
-  plugin :json
-  plugin :path_matchers
-  plugin :empty_root
+    plugin :render, engine: "haml"
+    plugin :partials
+    plugin :view_options
 
   require "./assets/assets"
   

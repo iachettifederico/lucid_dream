@@ -1,4 +1,4 @@
-class LucidDream < Roda
+class LucidDream::WebApp < Roda
   def self.css_files
     %w[normalize.css foundation.min.css]
   end
