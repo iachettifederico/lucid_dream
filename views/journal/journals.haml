@@ -1,0 +1,7 @@
+= page_title do
+  %h1 Your Journals
+
+.panel
+  %ul
+    - present_collection(journals) do |journal|
+      %li= journal.link
