@@ -1,6 +1,9 @@
 require "./plugins/extension_matchers"
 require "./plugins/haml_helpers"
 require "./plugins/foundation_helpers"
+require "./plugins/mystique"
+require "fattr"
+require "string_plus"
 
 class LucidDream < Roda
   plugin :environments
