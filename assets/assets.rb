@@ -10,7 +10,7 @@ class LucidDream::WebApp < Roda
   def self.js_files
     js = []
     js.concat %w[vendor/jquery.js vendor/modernizr.js vendor/fastclick.js foundation/foundation.js]
-    js.concat foundation_plugins("alert", "topbar")
+    js.concat foundation_plugins("alert", "topbar", "accordion")
     js << "main.js"
     js
   end

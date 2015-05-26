@@ -10,6 +10,7 @@ class Roda
         def page_title(text=nil, &block)
           content_tag(:div, text, class: "panel text-center", &block)
         end
+
         private
 
         def content_tag(tag, text=nil, **options, &block)

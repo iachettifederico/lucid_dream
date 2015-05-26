@@ -1,0 +1,11 @@
+= page_title do
+  %h1= journal
+
+%h2 Entries
+
+%ul.accordion(data-accordion)
+  - present_collection(journal.entries) do |entry|
+    %li.accordion-navigation
+      = link entry, "##{entry.to_s.underscore}"
+      .content.panel(id="#{entry.to_s.underscore}")
+        = entry.content

@@ -48,6 +48,19 @@ class Roda
           alias :"button_#{type}" :"#{type}_button"
         end
 
+        def panel(title: nil, &block)
+          content_tag(:div, title, class: "panel") do
+            title_text = if title
+                           content_tag(:h2, title, class: "text-center") +
+                             content_tag(:hr)
+                         end
+            [
+             title_text,
+             content_tag(:span, &block)
+            ].compact.join
+          end
+        end
+
         private
 
         def foundation_tag(tag, text=nil, type: :default, size: :default, disabled: false, **options, &block)
