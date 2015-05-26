@@ -6,24 +6,6 @@ require "fattr"
 require "string_plus"
 
 module LucidDream
-  class InMemoryRegistry
-    def journal_repository
-      journals = [
-                  Journal.new(name: "My first journal"),
-                  Journal.new(name: "two"),
-                  Journal.new(name: "three"),
-                  Journal.new(name: "four"),
-                 ]
-      InMemoryJournalRepository.new(journals)
-    end
-
-    
-  end
-  
-  def self.registry
-    @registry ||= InMemoryRegistry.new
-  end
-  
   class WebApp < Roda
     plugin :environments
     self.environment = ENV["ENVIRONMENT"]
@@ -39,7 +21,6 @@ module LucidDream
     require "./assets/assets"
 
     Dir["./models/*.rb"].each{|f| require f}
-    Dir["./repositories/*.rb"].each{|f| require f}
 
     plugin :extension_matcher
 
@@ -56,9 +37,8 @@ module LucidDream
       end
 
       r.on "journal" do
-        journal_repo = LucidDream.registry.journal_repository
         r.root do
-          view "journal/journals", locals: {journals: journal_repo.all}
+          view "journal/journals", locals: {journals: []}
         end
 
         r.on ":slug" do |slug|
