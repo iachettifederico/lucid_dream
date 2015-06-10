@@ -1,24 +1,6 @@
-%nav.top-bar(data-topbar role="navigation")
-  %ul.title-area
-    %li.name
-      %h1= link "Lucid Dream", "#"
-      
-    / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
-    %li.toggle-topbar.menu-icon
-      %a(href="#")
-        %span Menu
-        
-  %section.top-bar-section
-    %ul.left
+%nav
+  .nav-wrapper
+    = link "Lucid Dream", "/", class: "brand-logo"
+    %ul(id="nav-mobile" class="right hide-on-med-and-down")
+      %li= link "Home", "/"
       %li= link "Journal", "/journal"
-
-    / %ul.right
-    /   %li.active
-    /     %a(href="#") Right Button Active
-    /   %li.has-dropdown
-    /     %a(href="#") Right Button Dropdown
-    /     %ul.dropdown
-    /       %li
-    /         %a(href="#") First link in dropdown
-    /       %li.active
-    /         %a(href="#") Active link in dropdown
